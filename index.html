@@ -42,6 +42,115 @@
       font-weight: 600;
     }
 
+    /* Disclaimer Modal */
+    .disclaimer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .disclaimer-overlay.hidden {
+      display: none;
+    }
+
+    .disclaimer-modal {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 2.5rem;
+      max-width: 550px;
+      width: 100%;
+      border: 1px solid var(--border);
+      text-align: center;
+      animation: modalFadeIn 0.3s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .disclaimer-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .disclaimer-modal h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .disclaimer-modal p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .disclaimer-modal p strong {
+      color: var(--text);
+    }
+
+    .disclaimer-list {
+      text-align: left;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .disclaimer-list li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+      list-style: none;
+    }
+
+    .disclaimer-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .disclaimer-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .disclaimer-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    .disclaimer-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
     /* Animated background */
     .bg-gradient {
       position: fixed;
@@ -559,10 +668,32 @@
       section {
         padding: 3rem 1.5rem;
       }
+
+      .disclaimer-modal {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Disclaimer Modal -->
+  <div class="disclaimer-overlay" id="disclaimerOverlay">
+    <div class="disclaimer-modal">
+      <div class="disclaimer-icon">⚠️</div>
+      <h2>Important Disclaimer</h2>
+      <p>This website is <strong>not an official source</strong> of medical information or guidance.</p>
+      <ul class="disclaimer-list">
+        <li>Not affiliated with any government agency or institution</li>
+        <li>Not affiliated with the University of Oklahoma</li>
+        <li>Created as an educational project for ENGL 1213</li>
+        <li>Does not constitute medical advice</li>
+        <li>Always consult healthcare professionals for medical decisions</li>
+      </ul>
+      <p>For emergencies, <strong>always call 911</strong>. The external resources linked here are provided for informational purposes only.</p>
+      <button class="disclaimer-btn" onclick="dismissDisclaimer()">I Understand</button>
+    </div>
+  </div>
+
   <div class="bg-gradient"></div>
 
   <nav>
@@ -749,7 +880,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Nothing happens. Naloxone only affects opioids in someone's system. If there are no opioids present, there are no side effects whatsoever. It's like using an EpiPen on someone who isn't having an allergic reaction; no harm done.
+            Nothing happens. Naloxone only affects opioids in someone's system. If there are no opioids present, there are no side effects whatsoever. It's like using an EpiPen on someone who isn't having an allergic reaction—no harm done.
           </div>
         </div>
       </div>
@@ -761,7 +892,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            No. 90% of fentanyl overdoses in Oklahoma come from pills that people thought were something else, Xanax, Percocet, or other pressed pills. You're not expecting drug use; you're prepared for an emergency that can happen to anyone. It's like carrying a first aid kit.
+            No. 90% of fentanyl overdoses in Oklahoma come from pills that people thought were something else—Xanax, Percocet, or other pressed pills. You're not expecting drug use; you're prepared for an emergency that can happen to anyone. It's like carrying a first aid kit.
           </div>
         </div>
       </div>
@@ -773,7 +904,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Look for: blue or grayish lips and fingertips, slow or stopped breathing, unresponsiveness (won't wake up to loud sounds or pain), small "pinpoint" pupils, and gurgling or choking sounds. If you're unsure, administer naloxone anyway; it won't hurt them.
+            Look for: blue or grayish lips and fingertips, slow or stopped breathing, unresponsiveness (won't wake up to loud sounds or pain), small "pinpoint" pupils, and gurgling or choking sounds. If you're unsure, administer naloxone anyway—it won't hurt them.
           </div>
         </div>
       </div>
@@ -785,7 +916,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Naloxone works for 30-90 minutes. Some opioids (especially fentanyl) can last longer, so the person might start overdosing again. That's why calling 911 is critical; they need medical monitoring even after naloxone works.
+            Naloxone works for 30-90 minutes. Some opioids (especially fentanyl) can last longer, so the person might start overdosing again. That's why calling 911 is critical—they need medical monitoring even after naloxone works.
           </div>
         </div>
       </div>
@@ -809,7 +940,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Somewhere accessible: your backpack, car glovebox, purse, nightstand, or medicine cabinet. Keep it at room temperature and out of direct sunlight. Check the expiration date occasionally; expired naloxone may still work, but it is less effective.
+            Somewhere accessible: your backpack, car glovebox, purse, nightstand, or medicine cabinet. Keep it at room temperature and out of direct sunlight. Check the expiration date occasionally—expired naloxone may still work, but it's less effective.
           </div>
         </div>
       </div>
@@ -819,10 +950,15 @@
   <footer>
     <p>Made for ENGL 1213 at the University of Oklahoma</p>
     <p style="margin-top: 0.5rem;">Questions? <a href="mailto:Jett.H.Conway-1@ou.edu">Jett.H.Conway-1@ou.edu</a></p>
-    <p style="margin-top: 1rem; font-size: 0.8rem;">This is an educational resource. For medical emergencies, always call 911.</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem;">This is an educational resource, not an official source. Not affiliated with any government or institution. For medical emergencies, always call 911.</p>
   </footer>
 
   <script>
+    // Disclaimer dismissal
+    function dismissDisclaimer() {
+      document.getElementById('disclaimerOverlay').classList.add('hidden');
+    }
+
     // FAQ Accordion
     document.querySelectorAll('.faq-question').forEach(button => {
       button.addEventListener('click', () => {
