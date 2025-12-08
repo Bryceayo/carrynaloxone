@@ -19,6 +19,25 @@
       --border: rgba(255,255,255,0.08);
     }
 
+    /* OU Theme - activated on hover */
+    body.ou-mode {
+      --accent: #7c181c;
+      --accent-glow: rgba(124, 24, 28, 0.4);
+    }
+
+    body.ou-mode .hero h1 span {
+      background: linear-gradient(135deg, #7c181c, #f5f0e8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    body.ou-mode .hero-badge {
+      background: rgba(124, 24, 28, 0.15);
+      border-color: rgba(124, 24, 28, 0.4);
+      color: #f5f0e8;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -226,6 +245,8 @@
       margin-bottom: 1.5rem;
       border: 1px solid rgba(249, 115, 22, 0.3);
       animation: fadeInUp 0.6s ease-out;
+      cursor: pointer;
+      transition: all 0.3s;
     }
 
     .hero h1 {
@@ -998,6 +1019,17 @@
         }
       });
     });
+
+    // === OU hover mode on hero badge ===
+    const heroBadge = document.querySelector('.hero-badge');
+    if (heroBadge) {
+      heroBadge.addEventListener('mouseenter', () => {
+        document.body.classList.add('ou-mode');
+      });
+      heroBadge.addEventListener('mouseleave', () => {
+        document.body.classList.remove('ou-mode');
+      });
+    }
   </script>
 </body>
 </html>
