@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carry Naloxone | Save a Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0f1c;
+      --bg-card: #111827;
+      --accent: #f97316;
+      --accent-glow: rgba(249, 115, 22, 0.3);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+    }
+
+    /* Animated background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+        var(--bg-dark);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: rgba(10, 15, 28, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero-badge {
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s ease-out 0.1s both;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), #fb923c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeInUp 0.6s ease-out 0.3s both;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(249, 115, 22, 0.1);
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* How It Works */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .step {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .step-number {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.03);
+    }
+
+    .step-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(249, 115, 22, 0.15);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .step h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Resources Cards */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .resource-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .resource-card:hover {
+      border-color: var(--success);
+      transform: translateY(-3px);
+    }
+
+    .resource-card.featured {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(249, 115, 22, 0.05));
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+
+    .resource-card.featured:hover {
+      border-color: var(--accent);
+    }
+
+    .resource-tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .tag-free {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+    }
+
+    .tag-local {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .tag-training {
+      background: rgba(168, 85, 247, 0.2);
+      color: #c084fc;
+    }
+
+    .resource-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .resource-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .resource-link {
+      color: var(--accent);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .resource-link::after {
+      content: "→";
+      transition: transform 0.3s;
+    }
+
+    .resource-card:hover .resource-link::after {
+      transform: translateX(5px);
+    }
+
+    /* FAQ Accordion */
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .faq-question:hover {
+      color: var(--accent);
+    }
+
+    .faq-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+      color: var(--accent);
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .faq-answer-inner {
+      padding: 0 1.5rem 1.5rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+    }
+
+    /* Emergency Banner */
+    .emergency-banner {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .emergency-banner h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .emergency-banner p {
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .emergency-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    /* Good Samaritan Section */
+    .legal-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .legal-box h3 {
+      color: var(--success);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .legal-box ul {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .legal-box li {
+      padding: 0.75rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: var(--text-muted);
+    }
+
+    .legal-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .stats-banner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      section {
+        padding: 3rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+
+  <nav>
+    <div class="logo">💊 CarryNaloxone</div>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#get">Get Naloxone</a></li>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">🎓 Made for OU Students</div>
+    <h1>You Could <span>Save a Life</span><br>in 2 Minutes</h1>
+    <p>Naloxone reverses opioid overdoses. It's free, safe, and easy to use. Learn how to get yours and be prepared.</p>
+    <div class="hero-buttons">
+      <a href="https://okimready.org" target="_blank" class="btn btn-primary">Get Free Naloxone</a>
+      <a href="#how" class="btn btn-secondary">Learn How It Works</a>
+    </div>
+
+    <div class="stats-banner">
+      <div class="stat">
+        <span class="stat-number">730</span>
+        <span class="stat-label">Overdose deaths in OK (2023)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">90%</span>
+        <span class="stat-label">Involved fentanyl</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">1,500+</span>
+        <span class="stat-label">Lives saved by naloxone in OK</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">2-3</span>
+        <span class="stat-label">Minutes to work</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="section-header animate-on-scroll">
+      <h2>How Naloxone Works</h2>
+      <p>It's simpler than you think. One spray could save someone's life.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step animate-on-scroll">
+        <span class="step-number">01</span>
+        <div class="step-icon">🧠</div>
+        <h3>Opioids Block Breathing</h3>
+        <p>Opioids bind to receptors in your brain that control breathing. During an overdose, breathing slows or stops completely—that's why skin turns blue.</p>
+      </div>
+
+      <div class="step animate-on-scroll">
+        <span class="step-number">02</span>
+        <div class="step-icon">💊</div>
+        <h3>Naloxone Kicks Them Off</h3>
+        <p>Naloxone binds to those same receptors and knocks the opioids off. It's like a reset button that lets the brain start controlling breathing again.</p>
+      </div>
+
+      <div class="step animate-on-scroll">
+        <span class="step-number">03</span>
+        <div class="step-icon">💨</div>
+        <h3>Breathing Restarts</h3>
+        <p>Within 2-3 minutes, the person can start breathing again. This buys crucial time for emergency services to arrive.</p>
+      </div>
+
+      <div class="step animate-on-scroll">
+        <span class="step-number">04</span>
+        <div class="step-icon">✅</div>
+        <h3>Safe If You're Wrong</h3>
+        <p>Used naloxone on someone who wasn't overdosing? Nothing happens. Zero side effects. It only affects opioids in the system.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="get">
+    <div class="section-header animate-on-scroll">
+      <h2>Get Naloxone Free</h2>
+      <p>Multiple ways to get naloxone in Norman and Oklahoma—most are completely free.</p>
+    </div>
+
+    <div class="resources-grid">
+      <a href="https://okimready.org" target="_blank" class="resource-card featured animate-on-scroll">
+        <span class="resource-tag tag-free">Free + Shipped</span>
+        <h3>OK I'm Ready</h3>
+        <p>Get naloxone and fentanyl test strips mailed directly to your door. No cost, no credit card, no judgment.</p>
+        <span class="resource-link">Order now at okimready.org</span>
+      </a>
+
+      <div class="resource-card animate-on-scroll">
+        <span class="resource-tag tag-local">Norman</span>
+        <h3>OU Southwest Prevention Center</h3>
+        <p>Free naloxone kits available for OU students. Located on campus.</p>
+        <span class="resource-link">Visit in person</span>
+      </div>
+
+      <div class="resource-card animate-on-scroll">
+        <span class="resource-tag tag-local">Any Location</span>
+        <h3>CVS, Walgreens, Walmart</h3>
+        <p>No prescription needed in Oklahoma. Costs $30-50, but some insurance covers it.</p>
+        <span class="resource-link">Check your local pharmacy</span>
+      </div>
+
+      <a href="https://oklahoma.gov/odmhsas" target="_blank" class="resource-card animate-on-scroll">
+        <span class="resource-tag tag-free">Free</span>
+        <h3>ODMHSAS Distribution</h3>
+        <p>Oklahoma's mental health agency distributes free naloxone at events and partner locations statewide.</p>
+        <span class="resource-link">Find locations</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="training">
+    <div class="section-header animate-on-scroll">
+      <h2>Get Trained</h2>
+      <p>Naloxone is easy to use, but training builds confidence. These resources are free.</p>
+    </div>
+
+    <div class="resources-grid">
+      <a href="https://www.getnaloxonenow.org/#training" target="_blank" class="resource-card animate-on-scroll">
+        <span class="resource-tag tag-training">Online</span>
+        <h3>Get Naloxone Now</h3>
+        <p>Free online training. Takes about 20 minutes. Learn to recognize overdose signs and administer naloxone.</p>
+        <span class="resource-link">Start free training</span>
+      </a>
+
+      <a href="https://harmreduction.org/issues/overdose-prevention/overview/overdose-basics/responding-to-opioid-overdose/" target="_blank" class="resource-card animate-on-scroll">
+        <span class="resource-tag tag-training">Guide</span>
+        <h3>Harm Reduction Coalition</h3>
+        <p>Step-by-step guide on recognizing and responding to an opioid overdose. Printable resources available.</p>
+        <span class="resource-link">Read the guide</span>
+      </a>
+
+      <div class="resource-card animate-on-scroll">
+        <span class="resource-tag tag-local">Norman</span>
+        <h3>OU Student Health</h3>
+        <p>Ask about naloxone training at your next appointment, or contact them to schedule a session for your org.</p>
+        <span class="resource-link">Contact Student Health</span>
+      </div>
+
+      <a href="https://nextdistro.org/naloxone" target="_blank" class="resource-card animate-on-scroll">
+        <span class="resource-tag tag-free">Free + Ships</span>
+        <h3>NEXT Distro</h3>
+        <p>Another free mail-order naloxone program with built-in training materials and instructions.</p>
+        <span class="resource-link">Order with training</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="legal-box animate-on-scroll">
+      <h3>🛡️ Oklahoma's Good Samaritan Law Protects You</h3>
+      <p>Worried about getting in trouble if you call 911? Don't be. Oklahoma law protects you.</p>
+      <ul>
+        <li>You <strong>cannot be prosecuted</strong> for drug possession at the scene if you call 911 to help someone overdosing</li>
+        <li>The person overdosing is <strong>also protected</strong> from possession charges</li>
+        <li>This applies <strong>even if you've taken something yourself</strong>—the law wants you to make the call</li>
+        <li>Protection applies when you <strong>stay and cooperate</strong> with emergency responders</li>
+      </ul>
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">Reference: Oklahoma Good Samaritan Law, 63 O.S. § 2-413.1</p>
+    </div>
+
+    <div class="emergency-banner animate-on-scroll">
+      <h3>🚨 If Someone Is Overdosing</h3>
+      <p>Call 911 immediately. Administer naloxone. Stay with them until help arrives.</p>
+      <div class="emergency-number">911</div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-header animate-on-scroll">
+      <h2>Common Questions</h2>
+      <p>Everything you need to know about carrying and using naloxone.</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item animate-on-scroll">
+        <button class="faq-question">
+          What if I use naloxone and they weren't overdosing?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Nothing happens. Naloxone only affects opioids in someone's system. If there are no opioids present, there are no side effects whatsoever. It's like using an EpiPen on someone who isn't having an allergic reaction—no harm done.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item animate-on-scroll">
+        <button class="faq-question">
+          Does carrying naloxone mean I expect my friends to use drugs?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            No. 90% of fentanyl overdoses in Oklahoma come from pills that people thought were something else—Xanax, Percocet, or other pressed pills. You're not expecting drug use; you're prepared for an emergency that can happen to anyone. It's like carrying a first aid kit.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item animate-on-scroll">
+        <button class="faq-question">
+          How do I recognize an overdose?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Look for: blue or grayish lips and fingertips, slow or stopped breathing, unresponsiveness (won't wake up to loud sounds or pain), small "pinpoint" pupils, and gurgling or choking sounds. If you're unsure, administer naloxone anyway—it won't hurt them.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item animate-on-scroll">
+        <button class="faq-question">
+          How long does naloxone last?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Naloxone works for 30-90 minutes. Some opioids (especially fentanyl) can last longer, so the person might start overdosing again. That's why calling 911 is critical—they need medical monitoring even after naloxone works.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item animate-on-scroll">
+        <button class="faq-question">
+          Does naloxone enable drug use?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Research consistently shows that naloxone access does not increase drug use. We don't say EpiPens enable people to eat foods they're allergic to, or that seatbelts enable reckless driving. Naloxone is a safety tool—nothing more.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item animate-on-scroll">
+        <button class="faq-question">
+          Where should I keep my naloxone?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Somewhere accessible: your backpack, car glovebox, purse, nightstand, or medicine cabinet. Keep it at room temperature and out of direct sunlight. Check the expiration date occasionally—expired naloxone may still work but is less effective.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made for ENGL 1213 | University of Oklahoma</p>
+    <p style="margin-top: 0.5rem;">Questions? <a href="mailto:jett@ou.edu">jett@ou.edu</a></p>
+    <p style="margin-top: 1rem; font-size: 0.8rem;">This is an educational resource. For medical emergencies, always call 911.</p>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.parentElement;
+        const isActive = item.classList.contains('active');
+        
+        // Close all others
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        
+        // Toggle current
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
