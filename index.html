@@ -4,9 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carry Naloxone | Save a Life</title>
+  <link rel="icon" type="image/png" href="https://images.squarespace-cdn.com/content/v1/63010dd15897150c2f2d650b/448981f0-8fac-47fb-aced-c3adbb821d42/narcan-nasal-spray.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- 
+    
+    Hey, I see you inspecting my code... you're not slick 👀
+    
+    But since you're here, thanks for checking out the site!
+    Made with love (and a lot of Claude AI help) for ENGL 1213.
+    
+    Now go get some naloxone: https://okimready.org
+    
+  -->
   <style>
     :root {
       --bg-dark: #0a0f1c;
@@ -202,8 +213,16 @@
     .logo {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 28px;
+      width: auto;
     }
 
     .nav-links {
@@ -718,7 +737,10 @@
   <div class="bg-gradient"></div>
 
   <nav>
-    <div class="logo">💊 CarryNaloxone</div>
+    <div class="logo">
+      <img src="https://images.squarespace-cdn.com/content/v1/63010dd15897150c2f2d650b/448981f0-8fac-47fb-aced-c3adbb821d42/narcan-nasal-spray.png" alt="Narcan">
+      Jett's Naloxone Resources
+    </div>
     <ul class="nav-links">
       <li><a href="#how">How It Works</a></li>
       <li><a href="#get">Get Naloxone</a></li>
@@ -809,7 +831,7 @@
 
       <div class="resource-card animate-on-scroll">
         <span class="resource-tag tag-local">Norman</span>
-        <h3>OU Southwest Prevention Center</h3>
+        <h3>OU Goddard Health Center</h3>
         <p>Free naloxone kits available for OU students. Located on campus.</p>
         <span class="resource-link">Visit in person</span>
       </div>
@@ -1030,6 +1052,10 @@
         document.body.classList.remove('ou-mode');
       });
     }
+
+    // Easter egg for the real ones
+    console.log("%c👀 Hey, I see you in the console too!", "font-size: 16px; color: #f97316;");
+    console.log("%cNow go get some naloxone: https://okimready.org", "font-size: 12px; color: #94a3b8;");
   </script>
 </body>
 </html>
