@@ -13,7 +13,7 @@
     Hey, I see you inspecting my code... you're not slick 👀
     
     But since you're here, thanks for checking out the site!
-    Made with love (and a lot of Claude AI help) for ENGL 1213.
+    Made with love. For ENGL 1213.
     
     Now go get some naloxone: https://okimready.org
     
@@ -522,6 +522,178 @@
       transform: translateX(5px);
     }
 
+    /* Store Locator Card */
+    .store-locator-card {
+      display: flex;
+      gap: 1.5rem;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s;
+      align-items: center;
+    }
+
+    .store-locator-card:hover {
+      border-color: #60a5fa;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+    }
+
+    .store-locator-icon {
+      flex-shrink: 0;
+      width: 80px;
+      height: 80px;
+      background: rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #60a5fa;
+    }
+
+    .store-locator-content {
+      flex: 1;
+    }
+
+    .store-locator-tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .store-locator-content h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .store-locator-content p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .store-locator-link {
+      color: #60a5fa;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: gap 0.3s;
+    }
+
+    .store-locator-card:hover .store-locator-link {
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      .store-locator-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .store-locator-icon {
+        width: 64px;
+        height: 64px;
+      }
+      
+      .store-locator-icon svg {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .store-locator-link {
+        justify-content: center;
+      }
+    }
+
+    /* Flip Card Styles */
+    .flip-card {
+      perspective: 1000px;
+      height: 220px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .flip-card:hover .flip-card-front,
+    .flip-card.flipped:hover .flip-card-back {
+      border-color: var(--success);
+    }
+
+    .flip-hint {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    .flip-card-back h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--success);
+    }
+
+    .flip-card-back p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .flip-card-back a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .flip-card-back a:hover {
+      text-decoration: underline;
+    }
+
     /* FAQ Accordion */
     .faq-list {
       max-width: 800px;
@@ -712,6 +884,10 @@
       .disclaimer-modal {
         padding: 1.5rem;
       }
+
+      .flip-card {
+        height: 240px;
+      }
     }
   </style>
 </head>
@@ -817,23 +993,35 @@
 
   <section id="get">
     <div class="section-header animate-on-scroll">
-      <h2>Get Naloxone Free</h2>
-      <p>Multiple ways to get naloxone in Norman and Oklahoma; most are completely free.</p>
+      <h2>Get Naloxone</h2>
+      <p>Multiple ways to get naloxone in Norman and Oklahoma. Most are completely free.</p>
     </div>
 
     <div class="resources-grid">
       <a href="https://okimready.org" target="_blank" class="resource-card featured animate-on-scroll">
         <span class="resource-tag tag-free">Free + Shipped</span>
         <h3>OK I'm Ready</h3>
-        <p>Get naloxone and fentanyl test strips mailed directly to your door. No cost, no credit card, no judgment.</p>
+        <p>Get naloxone and fentanyl test strips mailed directly to your door. No cost, no credit card, no judgment. Also has additional resources and information.</p>
         <span class="resource-link">Order now at okimready.org</span>
       </a>
 
-      <div class="resource-card animate-on-scroll">
-        <span class="resource-tag tag-local">Norman</span>
-        <h3>OU Goddard Health Center</h3>
-        <p>Free naloxone kits available for OU students. Located on campus.</p>
-        <span class="resource-link">Visit in person</span>
+      <div class="flip-card animate-on-scroll" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <span class="resource-tag tag-free">Free</span>
+            <h3>OU Goddard Health Center</h3>
+            <p>Free naloxone kits available for OU students. Located on campus, no appointment needed to pick one up.</p>
+            <span class="resource-link">Click for details</span>
+            <span class="flip-hint">tap to flip</span>
+          </div>
+          <div class="flip-card-back">
+            <h3>📍 Goddard Health Center</h3>
+            <p><strong>Address:</strong> 620 Elm Ave, Norman, OK 73019</p>
+            <p><strong>Hours:</strong> Mon-Fri 8am-5pm during fall/spring semesters</p>
+            <p><strong>Phone:</strong> (405) 325-4611</p>
+            <a href="https://www.ou.edu/healthservices" target="_blank">Visit website →</a>
+          </div>
+        </div>
       </div>
 
       <div class="resource-card animate-on-scroll">
@@ -842,14 +1030,23 @@
         <p>No prescription needed in Oklahoma. Costs $30-50, but some insurance covers it.</p>
         <span class="resource-link">Check your local pharmacy</span>
       </div>
-
-      <a href="https://oklahoma.gov/odmhsas" target="_blank" class="resource-card animate-on-scroll">
-        <span class="resource-tag tag-free">Free</span>
-        <h3>ODMHSAS Distribution</h3>
-        <p>Oklahoma's mental health agency distributes free naloxone at events and partner locations statewide.</p>
-        <span class="resource-link">Find locations</span>
-      </a>
     </div>
+
+    <!-- NARCAN Store Locator Link -->
+    <a href="https://www.narcan.com/find-store" target="_blank" class="store-locator-card animate-on-scroll">
+      <div class="store-locator-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+      </div>
+      <div class="store-locator-content">
+        <span class="store-locator-tag">Official Tool</span>
+        <h3>Find NARCAN Near You</h3>
+        <p>Use NARCAN's official interactive store locator to find pharmacies, retailers, and other locations near you with real-time stock information.</p>
+        <span class="store-locator-link">Open Store Locator <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></span>
+      </div>
+    </a>
   </section>
 
   <section id="training">
@@ -873,12 +1070,12 @@
         <span class="resource-link">Read the guide</span>
       </a>
 
-      <div class="resource-card animate-on-scroll">
-        <span class="resource-tag tag-local">Norman</span>
-        <h3>OU Student Health</h3>
-        <p>Ask about naloxone training at your next appointment, or contact them to schedule a session for your org.</p>
-        <span class="resource-link">Contact Student Health</span>
-      </div>
+      <a href="https://outreach.ou.edu/Community-Services/Health-and-Human-Services/Southwest-Prevention-Center" target="_blank" class="resource-card animate-on-scroll">
+        <span class="resource-tag tag-local">OU Resource</span>
+        <h3>Southwest Prevention Center</h3>
+        <p>OU's prevention center offers training and resources for students and organizations. Contact them to schedule a session for your group.</p>
+        <span class="resource-link">Learn more</span>
+      </a>
 
       <a href="https://nextdistro.org/naloxone" target="_blank" class="resource-card animate-on-scroll">
         <span class="resource-tag tag-free">Free + Ships</span>
@@ -896,7 +1093,7 @@
       <ul>
         <li>You <strong>cannot be prosecuted</strong> for drug possession at the scene if you call 911 to help someone overdosing</li>
         <li>The person overdosing is <strong>also protected</strong> from possession charges</li>
-        <li>This applies <strong>even if you've taken something yourself</strong>, the law wants you to make the call</li>
+        <li>This applies <strong>even if you've taken something yourself</strong>. The law wants you to make the call</li>
         <li>Protection applies when you <strong>stay and cooperate</strong> with emergency responders</li>
       </ul>
       <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">Reference: Oklahoma Good Samaritan Law, 63 O.S. § 2-413.1</p>
@@ -923,7 +1120,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Nothing happens. Naloxone only affects opioids in someone's system. If there are no opioids present, there are no side effects whatsoever. It's like using an EpiPen on someone who isn't having an allergic reaction; no harm done.
+            Nothing happens. Naloxone only affects opioids in someone's system. If there are no opioids present, there are no side effects whatsoever. It's like using an EpiPen on someone who isn't having an allergic reaction. No harm done.
           </div>
         </div>
       </div>
@@ -935,7 +1132,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            No. 90% of fentanyl overdoses in Oklahoma come from pills that people thought were something else, Xanax, Percocet, or other pressed pills. You're not expecting drug use; you're prepared for an emergency that can happen to anyone. It's like carrying a first aid kit.
+            No. 90% of fentanyl overdoses in Oklahoma come from pills that people thought were something else: Xanax, Percocet, or other pressed pills. You're not expecting drug use. You're prepared for an emergency that can happen to anyone. It's like carrying a first aid kit.
           </div>
         </div>
       </div>
@@ -947,7 +1144,7 @@
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            Look for: blue or grayish lips and fingertips, slow or stopped breathing, unresponsiveness (won't wake up to loud sounds or pain), small "pinpoint" pupils, and gurgling or choking sounds. If you're unsure, administer naloxone anyway; it won't hurt them.
+            Look for: blue or grayish lips and fingertips, slow or stopped breathing, unresponsiveness (won't wake up to loud sounds or pain), small "pinpoint" pupils, and gurgling or choking sounds. If you're unsure, administer naloxone anyway. It won't hurt them.
           </div>
         </div>
       </div>
